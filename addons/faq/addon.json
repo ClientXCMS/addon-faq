@@ -1,0 +1,13 @@
+{
+    "name": "Faq",
+    "description": "Addon to manage Frequently Asked Questions",
+    "uuid": "faq",
+    "version": "1.0",
+    "author": {
+        "name": "Vincent V.",
+        "email": "vincent.v@fardihosting.fr"
+    },
+    "providers": [
+        "App\\Addons\\Faq\\FaqServiceProvider"
+    ]
+}
