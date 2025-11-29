@@ -35,8 +35,12 @@ return [
         'product' => 'Product',
         'none' => 'None',
         'group_help' => 'Leave empty to display the FAQ globally or for a product.',
-        'product_help' => 'Optional: target a specific product instead of a full group.',
+        'product_help' => 'Optional: target a specific product. The FAQ will appear on the product configuration page during checkout.',
         'answer' => 'Your answer',
+    ],
+    'stats' => [
+        'title' => 'Question usefulness',
+        'description' => 'Summary of yes / no votes left by customers.',
     ],
     'bouton' => [
         'update' => 'Update',

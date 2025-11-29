@@ -21,13 +21,13 @@
           <button class="btn btn-primary">
             {{ __('global.update') }}
           </button>
-          @if ($faq->group_id)
+          @if ($faq->group)
             <a href="{{ route('client.faq.group', $faq->group->slug) }}" class="btn btn-secondary" target="_blank">
               {{ __('global.seemore') }}
             </a>
           @endif
-          @if ($faq->product_id)
-            <a href="{{ route('client.product.show', $faq->product->slug) }}" class="btn btn-secondary" target="_blank">
+          @if ($faq->product)
+            <a href="{{ route('front.store.basket.config', $faq->product->id)}}" class="btn btn-secondary" target="_blank">
               {{ __('global.seemore') }}
             </a>
           @endif
@@ -82,10 +82,10 @@
         <div class="card-heading flex items-center justify-between">
           <div>
             <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
-              Utilité de la question
+              {{ __('faq::messages.stats.title') }}
             </h3>
             <p class="text-sm text-gray-600 dark:text-gray-400">
-              Synthèse des votes oui / non laissés par les clients.
+              {{ __('faq::messages.stats.description') }}
             </p>
           </div>
         </div>
@@ -123,7 +123,7 @@
               </div>
               <div>
                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Total
+                  {{ __('store.total') }}
                 </p>
                 <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
                   {{ ($faq->useful_yes_count ?? 0) + ($faq->useful_no_count ?? 0) }}

@@ -7,6 +7,7 @@ use App\Core\Menu\AdminMenuItem;
 use App\Core\Admin\Dashboard\AdminCountWidget;
 use Illuminate\Support\Facades\Route;
 use App\Addons\Faq\Controllers\Admin\FaqController;
+use App\Addons\Faq\Database\Seeders\FaqSeeder;
 
 class FaqServiceProvider extends BaseAddonServiceProvider
 {
@@ -25,6 +26,7 @@ class FaqServiceProvider extends BaseAddonServiceProvider
         $this->loadTranslations(); 
         $this->loadMigrations();
         $this->loadViews();
+        $this->addSeeder(FaqSeeder::class);
         $this->app['settings']->addCardItem('personalization','faq','faq::messages.settings.title','faq::messages.settings.description','bi bi-gear',[FaqController::class, 'index'],'admin.settings.manage');
     }
     public function loadRoutes()
