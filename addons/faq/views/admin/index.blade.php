@@ -42,13 +42,13 @@
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">#</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
-                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.index.table.title') }}</span>
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.title') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
-                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.index.table.group') }}</span>
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.group') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
-                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.index.table.product') }}</span>
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.product') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.created') }}</span>
@@ -62,11 +62,8 @@
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                     @if ($items->count() === 0)
                                         <tr class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
-                                            <td colspan="5" class="px-6 py-8 whitespace-nowrap text-center">
+                                            <td colspan="6" class="px-6 py-8 whitespace-nowrap text-center">
                                                 <div class="flex flex-col items-center">
-                                                    <svg class="h-10 w-10 text-gray-400 dark:text-gray-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-                                                    </svg>
                                                     <p class="text-sm text-gray-800 dark:text-gray-400">{{ __('global.no_results') }}</p>
                                                 </div>
                                             </td>
@@ -137,6 +134,35 @@
                         <div class="py-1 px-4 mx-auto">
                             {{ $items->links('admin.shared.layouts.pagination') }}
                         </div>
+                        
+                            <form method="POST" action="{{ route('admin.faq.settings.update') }}" class="mt-6">
+                                @csrf
+                                @method('PUT')
+                                <div class="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">
+                                                {{ __('faq::messages.settings.usefulness_label') }}
+                                            </p>
+                                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                {{ __('faq::messages.settings.usefulness_help') }}
+                                            </p>
+                                        </div>
+                                        <div class="mt-1">
+                                            @include('admin/shared/switch', [
+                                                'name' => 'faq_usefulness_enabled',
+                                                'label' => '',
+                                                'checked' => setting('faq_usefulness_enabled', true),
+                                            ])
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-end mt-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('global.save') }}
+                                    </button>
+                                </div>
+                            </form>
                     </div>
                 </div>
             </div>

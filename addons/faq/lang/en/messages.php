@@ -4,17 +4,12 @@ return [
     'settings' => [
         'title' => 'FAQ',
         'description' => 'Manage your FAQs.',
+        'usefulness_label' => 'Enable usefulness votes',
+        'usefulness_help' => 'Uncheck to hide Yes/No buttons and disable vote collection.',
     ],
     'index' => [
         'title' => 'FAQ Management',
         'description' => 'List of system questions and answers.',
-        'table' => [
-            'title' => 'Title',
-            'group' => 'Group', 
-            'product' => 'Product',
-            'create' => 'Created at', 
-            'action' => 'Actions'
-        ]
     ],
     'faq' => [
         'create' => 'Your FAQ has been successfully created.',
@@ -40,6 +35,8 @@ return [
     ],
     'stats' => [
         'title' => 'Question usefulness',
+        'disabled_title' => 'Usefulness votes disabled',
+        'disabled_description' => 'Usefulness votes for this FAQ are currently disabled. Enable them in the settings to start collecting feedback.',
         'description' => 'Summary of yes / no votes left by customers.',
     ],
     'bouton' => [

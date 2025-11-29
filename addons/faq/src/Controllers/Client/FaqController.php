@@ -64,6 +64,10 @@ class FaqController extends Controller
 
     public function usefulness(Request $request, Faq $faq): JsonResponse|RedirectResponse
     {
+        if (! setting('faq_usefulness_enabled', true)) {
+            abort(404);
+        }
+
         $data = $request->validate([
             'is_useful' => ['required', 'boolean'],
         ]);

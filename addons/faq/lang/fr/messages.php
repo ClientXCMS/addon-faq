@@ -4,15 +4,12 @@ return [
     'settings' => [
         'title' => 'FAQ',
         'description' => 'Permet de gérer vos FAQ.',
+        'usefulness_label' => 'Activer les votes d’utilité',
+        'usefulness_help' => 'Décochez pour masquer les boutons Oui/Non et désactiver la collecte des votes.',
     ],
     'index' => [
         'title' => 'Gestion des FAQ',
         'description' => 'Liste des questions / réponses du système.',
-        'table' => [
-            'title' => 'Titre',
-            'group' => 'Groupe', 
-            'product' => 'Produit',
-        ]
     ],
     'faq' => [
         'create' => 'Vous avez bien créer votre FAQ.',
@@ -38,6 +35,8 @@ return [
     ],
     'stats' => [
         'title' => 'Utilité de la question',
+        'disabled_title' => 'Votes d\'utilité désactivés',
+        'disabled_description' => 'Les votes d\'utilité pour cette FAQ sont actuellement désactivés. Activez-les dans les paramètres pour commencer à collecter des avis.',
         'description' => 'Synthèse des votes oui / non laissés par les clients.',
     ],
     'client' => [

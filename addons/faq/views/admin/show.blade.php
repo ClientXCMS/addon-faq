@@ -90,6 +90,12 @@
           </div>
         </div>
         <div class="card-body">
+          @if (!setting('faq_usefulness_enabled', true))
+            <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+              <span class="font-medium">{{ __('faq::messages.stats.disabled_title') }}</span>
+              <p>{{ __('faq::messages.stats.disabled_description') }}</p>
+            </div>
+          @endif
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
               <div class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-300">
