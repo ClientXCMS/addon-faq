@@ -1,17 +1,55 @@
 @php
     use App\Addons\Faq\Models\Faq;
-    if ($group ?? null) {
+    use App\Models\Store\Group;
+    use App\Models\Store\Product;
+    
+    $currentUrl = request()->path();
+    $segments = explode('/', trim($currentUrl, '/'));
+    
+    $detectedGroup = null;
+    $detectedProduct = null;
+    
+    if (count($segments) >= 2 && $segments[0] === 'store') {
+        
+        if (isset($segments[1]) && $segments[1] === 'basket' && isset($segments[2]) && $segments[2] === 'config') {
+            $productId = $segments[3] ?? null;
+            if ($productId && is_numeric($productId)) {
+                $detectedProduct = Product::find((int) $productId);
+            }
+        }
+        else {
+            $groupSlug = $segments[1] ?? null;
+            if ($groupSlug) {
+                $detectedGroup = Group::where('slug', $groupSlug)->first();
+            }
+            
+            // Check for subgroup
+            $subgroupSlug = $segments[2] ?? null;
+            if ($subgroupSlug && $detectedGroup) {
+                $subgroup = Group::where('slug', $subgroupSlug)
+                    ->where('parent_id', $detectedGroup->id)
+                    ->first();
+                if ($subgroup) {
+                    $detectedGroup = $subgroup;
+                }
+            }
+        }
+    }
+    $group = $detectedGroup ?? $subgroup ?? $group ?? null;
+    $product = $detectedProduct ?? $product ?? null;
+    if ($group) {
         $faqs = $faqs ?? Faq::forContext($group);
     } else {
-        $faqs = $faqs ?? Faq::forContext(null, $product ?? null);
+        $faqs = $faqs ?? Faq::forContext(null, $product);
     }
     $headingTitle = $title ?? __('faq::messages.client.title');
     $headingDescription = $description ?? __('faq::messages.client.description');
-    $isGroupContext = !empty($group);
+    $isGroupContext = false;
     $usefulnessEnabled = setting('faq_usefulness_enabled', true);
 @endphp
+
 @if($faqs->isNotEmpty())
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] {{ $isGroupContext ? 'px-4 py-10 sm:px-6 lg:px-8 lg:py-14' : 'px-2 py-5 sm:px-3 lg:px-4 lg-py-7' }} mx-auto">
   <div class="max-w-2xl mx-auto text-center mb-12 lg:mb-16">
     <h2 class="text-2xl font-bold md:text-3xl md:leading-tight text-gray-800 dark:text-neutral-200">
       {{ $headingTitle }}

@@ -14,8 +14,8 @@ class FaqSeeder extends Seeder
         }
         $faqs = [
             [
-                'title' => 'Comment créer un compte ?',
-                'answer' => "Cliquez sur « S'inscrire » dans l'en-tête, remplissez vos informations puis validez votre adresse email.",
+                'title' => 'Comment commander ?',
+                'answer' => "Pour passer une commande, ajoutez les produits souhaités à votre panier, puis procédez au paiement via la page de commande.",
             ],
             [
                 'title' => 'Où voir et payer mes factures ?',
