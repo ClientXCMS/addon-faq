@@ -72,10 +72,30 @@ class FaqController extends Controller
             'is_useful' => ['required', 'boolean'],
         ]);
 
-        $faq->usefulnessVotes()->updateOrCreate(
-            ['ip_address' => $request->ip()],
-            ['is_useful' => $data['is_useful']]
-        );
+        $user = $request->user();
+
+        if ($user) {
+            $faq->usefulnessVotes()->updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'ip_address' => $request->ip(),
+                    'session_hash' => null,
+                    'is_useful' => $data['is_useful'],
+                ]
+            );
+        } else {
+            // Session hash prevents IP spoofing for anonymous votes
+            $sessionHash = hash('sha256', $request->session()->getId() . $request->ip());
+
+            $faq->usefulnessVotes()->updateOrCreate(
+                ['session_hash' => $sessionHash],
+                [
+                    'user_id' => null,
+                    'ip_address' => $request->ip(),
+                    'is_useful' => $data['is_useful'],
+                ]
+            );
+        }
 
         $this->loadUsefulnessCounts($faq);
 

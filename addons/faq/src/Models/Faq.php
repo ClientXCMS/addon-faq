@@ -4,6 +4,7 @@ namespace App\Addons\Faq\Models;
 
 use App\Models\Store\Group;
 use App\Models\Store\Product;
+use App\Models\Traits\HasMetadata;
 use App\Models\Traits\Translatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,9 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Faq extends Model
 {
+    use HasMetadata;
     use Translatable;
 
-    protected $table = 'faqs';       
+    protected $table = 'faqs';
 
     protected $fillable = [
         'title',
@@ -75,8 +77,8 @@ class Faq extends Model
 
     public function getTotalVotesAttribute(): int
     {
-        $yes = (int) ($this->attributes['useful_yes_count'] ?? 0);
-        $no  = (int) ($this->attributes['useful_no_count'] ?? 0);
+        $yes = (int) ($this->useful_yes_count ?? 0);
+        $no  = (int) ($this->useful_no_count ?? 0);
 
         return $yes + $no;
     }
@@ -87,8 +89,52 @@ class Faq extends Model
             return null;
         }
 
-        $yes = (int) ($this->attributes['useful_yes_count'] ?? 0);
+        $yes = (int) ($this->useful_yes_count ?? 0);
 
         return (int) round(($yes / $this->total_votes) * 100);
+    }
+
+    public static function forSection(string $section, ?int $limit = null): Collection
+    {
+        $query = static::query()
+            ->with(['group', 'product', 'metadata'])
+            ->withUsefulnessCounts()
+            ->whereHas('metadata', function ($q) use ($section) {
+                $q->where('key', 'display_' . $section)
+                  ->where('value', '1');
+            })
+            ->orderBy('order')
+            ->orderBy('id');
+
+        if ($limit !== null) {
+            $query->limit($limit);
+        }
+
+        return $query->get();
+    }
+
+    public static function getAvailableSections(): array
+    {
+        if (!app()->bound('faq.sections')) {
+            return [];
+        }
+
+        return app('faq.sections')->all();
+    }
+
+    public function shouldDisplayOn(string $section): bool
+    {
+        return $this->getMetadata('display_' . $section) === '1';
+    }
+
+    public function setDisplaySections(array $sections): void
+    {
+        foreach (static::getAvailableSections() as $key => $label) {
+            if (in_array($key, $sections)) {
+                $this->attachMetadata('display_' . $key, '1');
+            } else {
+                $this->detachMetadata('display_' . $key);
+            }
+        }
     }
 }

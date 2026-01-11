@@ -2,6 +2,7 @@
 
 namespace App\Addons\Faq\Models;
 
+use App\Models\Account\Customer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,7 +12,9 @@ class FaqUsefulness extends Model
 
     protected $fillable = [
         'faq_id',
+        'user_id',
         'ip_address',
+        'session_hash',
         'is_useful',
     ];
 
@@ -22,5 +25,10 @@ class FaqUsefulness extends Model
     public function faq(): BelongsTo
     {
         return $this->belongsTo(Faq::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class, 'user_id');
     }
 }

@@ -65,6 +65,32 @@
           'label'         => __('global.sort_order'),
           'value'         => old('sort_order', $faq->order ?? 0),
         ])
+
+        {{-- Display Sections --}}
+        @if(!empty($availableSections))
+        <div class="mt-6">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            {{ __('faq::messages.formulaire.display_sections') }}
+          </label>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            {{ __('faq::messages.formulaire.display_sections_help') }}
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            @foreach($availableSections as $sectionKey => $sectionLabel)
+            <label class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors">
+              <input
+                type="checkbox"
+                name="display_sections[]"
+                value="{{ $sectionKey }}"
+                class="form-checkbox h-5 w-5 text-primary-600 rounded border-gray-300 dark:border-gray-600 focus:ring-primary-500"
+                {{ ($faq->exists && $faq->shouldDisplayOn($sectionKey)) || in_array($sectionKey, old('display_sections', [])) ? 'checked' : '' }}
+              >
+              <span class="ml-3 text-sm text-gray-700 dark:text-gray-300">{{ $sectionLabel }}</span>
+            </label>
+            @endforeach
+          </div>
+        </div>
+        @endif
       </div>
     </div>
   </form>

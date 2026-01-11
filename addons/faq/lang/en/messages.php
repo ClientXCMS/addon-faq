@@ -32,6 +32,8 @@ return [
         'group_help' => 'Leave empty to display the FAQ globally or for a product.',
         'product_help' => 'Optional: target a specific product. The FAQ will appear on the product configuration page during checkout.',
         'answer' => 'Your answer',
+        'display_sections' => 'Display sections',
+        'display_sections_help' => 'Select the site sections where this FAQ should be displayed.',
     ],
     'stats' => [
         'title' => 'Question usefulness',

@@ -13,7 +13,9 @@ use App\Addons\Faq\Models\Faq;
 use App\Models\Store\Group;
 use App\Models\Store\Product;
 use App\Http\Controllers\Admin\AbstractCrudController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class FaqController extends AbstractCrudController
 {
@@ -30,10 +32,11 @@ class FaqController extends AbstractCrudController
         $data['faq'] = new Faq();
         $data['groups'] = Group::orderBy('name')->pluck('name', 'id')->toArray();
         $data['products'] = Product::orderBy('name')->pluck('name', 'id')->toArray();
+        $data['availableSections'] = Faq::getAvailableSections();
         return $data;
     }
 
-    public function destroy(Faq $faq)
+    public function destroy(Faq $faq): RedirectResponse
     {
         $faq->delete();
         return $this->deleteRedirect($faq);
@@ -41,18 +44,26 @@ class FaqController extends AbstractCrudController
 
     public function store(Request $request)
     {
+        $validSectionKeys = array_keys(Faq::getAvailableSections());
+
         $data = $request->validate([
             'title'    => ['required','string','max:255'],
             'answer'  => ['required','string'],
             'group_id' => ['nullable','integer','exists:groups,id'],
             'product_id' => ['nullable','integer','exists:products,id'],
             'sort_order' => ['nullable','integer','min:0'],
+            'display_sections' => ['nullable','array'],
+            'display_sections.*' => ['string', Rule::in($validSectionKeys)],
         ]);
+
+        $displaySections = $data['display_sections'] ?? [];
+        unset($data['display_sections']);
 
         $data['order'] = $data['sort_order'] ?? 0;
         unset($data['sort_order']);
 
         $faq = Faq::create($data);
+        $faq->setDisplaySections($displaySections);
 
         return $this->storeRedirect($faq);
     }
@@ -72,22 +83,31 @@ class FaqController extends AbstractCrudController
             'groups'    => $groups,
             'products'  => $products,
             'routePath' => $this->routePath,
+            'availableSections' => Faq::getAvailableSections(),
         ]);
     }
     public function update(Request $request, Faq $faq)
     {
+        $validSectionKeys = array_keys(Faq::getAvailableSections());
+
         $data = $request->validate([
             'title'    => ['required','string','max:255'],
             'answer'  => ['required','string'],
             'group_id' => ['nullable','integer','exists:groups,id'],
             'product_id' => ['nullable','integer','exists:products,id'],
             'sort_order' => ['nullable','integer','min:0'],
+            'display_sections' => ['nullable','array'],
+            'display_sections.*' => ['string', Rule::in($validSectionKeys)],
         ]);
+
+        $displaySections = $data['display_sections'] ?? [];
+        unset($data['display_sections']);
 
         $data['order'] = $data['sort_order'] ?? $faq->order;
         unset($data['sort_order']);
 
         $faq->update($data);
+        $faq->setDisplaySections($displaySections);
 
         return $this->updateRedirect($faq);
     }

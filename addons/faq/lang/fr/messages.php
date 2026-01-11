@@ -32,6 +32,8 @@ return [
         'group_help' => 'Laissez vide pour rendre la FAQ générale ou ciblée sur un produit.',
         'product_help' => 'Optionnel : ciblez un produit précis. La FAQ sera affichée dans la page de configuration du produit lors de la commande.',
         'answer' => 'Votre réponse',
+        'display_sections' => 'Sections d\'affichage',
+        'display_sections_help' => 'Sélectionnez les sections du site où cette FAQ doit être affichée.',
     ],
     'stats' => [
         'title' => 'Utilité de la question',

@@ -76,70 +76,97 @@
           'label'         => __('global.sort_order'),
           'value'         => old('sort_order', $faq->order ?? 0),
           ])
-        </div>
-      </div>
-      <div class="card mt-6">
-        <div class="card-heading flex items-center justify-between">
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
-              {{ __('faq::messages.stats.title') }}
-            </h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ __('faq::messages.stats.description') }}
-            </p>
+
+        {{-- Display Sections --}}
+        @if(!empty($availableSections))
+        <div class="mt-6">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+            {{ __('faq::messages.formulaire.display_sections') }}
+          </label>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            {{ __('faq::messages.formulaire.display_sections_help') }}
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            @foreach($availableSections as $sectionKey => $sectionLabel)
+            <label class="flex items-center p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors">
+              <input
+                type="checkbox"
+                name="display_sections[]"
+                value="{{ $sectionKey }}"
+                class="form-checkbox h-5 w-5 text-primary-600 rounded border-gray-300 dark:border-gray-600 focus:ring-primary-500"
+                {{ $faq->shouldDisplayOn($sectionKey) ? 'checked' : '' }}
+              >
+              <span class="ml-3 text-sm text-gray-700 dark:text-gray-300">{{ $sectionLabel }}</span>
+            </label>
+            @endforeach
           </div>
         </div>
-        <div class="card-body">
-          @if (!setting('faq_usefulness_enabled', true))
-            <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
-              <span class="font-medium">{{ __('faq::messages.stats.disabled_title') }}</span>
-              <p>{{ __('faq::messages.stats.disabled_description') }}</p>
-            </div>
-          @endif
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
-              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-300">
-                <i class="bi bi-hand-thumbs-up text-2xl"></i>
-              </div>
-              <div>
-                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {{ __('faq::messages.client.useful_yes') }}
-                </p>
-                <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
-                  {{ $faq->useful_yes_count ?? 0 }}
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
-              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-300">
-                <i class="bi bi-hand-thumbs-down text-2xl"></i>
-              </div>
-              <div>
-                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {{ __('faq::messages.client.useful_no') }}
-                </p>
-                <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
-                  {{ $faq->useful_no_count ?? 0 }}
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
-              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300">
-                <i class="bi bi-clipboard-check text-2xl"></i>
-              </div>
-              <div>
-                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {{ __('store.total') }}
-                </p>
-                <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
-                  {{ ($faq->useful_yes_count ?? 0) + ($faq->useful_no_count ?? 0) }}
-                </p>
-              </div>
-            </div>
-          </div>
+        @endif
         </div>
       </div>
     </form>
+
+    <div class="card mt-6">
+      <div class="card-heading flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+            {{ __('faq::messages.stats.title') }}
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            {{ __('faq::messages.stats.description') }}
+          </p>
+        </div>
+      </div>
+      <div class="card-body">
+        @if (!setting('faq_usefulness_enabled', true))
+          <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+            <span class="font-medium">{{ __('faq::messages.stats.disabled_title') }}</span>
+            <p>{{ __('faq::messages.stats.disabled_description') }}</p>
+          </div>
+        @endif
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-300">
+              <i class="bi bi-hand-thumbs-up text-2xl"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {{ __('faq::messages.client.useful_yes') }}
+              </p>
+              <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
+                {{ $faq->useful_yes_count ?? 0 }}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-300">
+              <i class="bi bi-hand-thumbs-down text-2xl"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {{ __('faq::messages.client.useful_no') }}
+              </p>
+              <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
+                {{ $faq->useful_no_count ?? 0 }}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300">
+              <i class="bi bi-clipboard-check text-2xl"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {{ __('store.total') }}
+              </p>
+              <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
+                {{ ($faq->useful_yes_count ?? 0) + ($faq->useful_no_count ?? 0) }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   @include('admin/translations/overlay', ['item' => $faq, 'id' => $faq->id])
 @endsection
