@@ -2,7 +2,7 @@
     "name": "Faq",
     "description": "Addon to manage Frequently Asked Questions",
     "uuid": "faq",
-    "version": "1.0",
+    "version": "1.1",
     "author": {
         "name": "Vincent V.",
         "email": "vincent.v@fardihosting.fr"
