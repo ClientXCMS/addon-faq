@@ -84,14 +84,14 @@ class FaqController extends Controller
                 ]
             );
         } else {
-            // Session hash prevents IP spoofing for anonymous votes
+            // Anonymous users: 1 vote per IP per FAQ
+            // Session hash adds extra layer but we match on IP to prevent multiple votes
             $sessionHash = hash('sha256', $request->session()->getId() . $request->ip());
 
             $faq->usefulnessVotes()->updateOrCreate(
-                ['session_hash' => $sessionHash],
+                ['ip_address' => $request->ip(), 'user_id' => null],
                 [
-                    'user_id' => null,
-                    'ip_address' => $request->ip(),
+                    'session_hash' => $sessionHash,
                     'is_useful' => $data['is_useful'],
                 ]
             );
