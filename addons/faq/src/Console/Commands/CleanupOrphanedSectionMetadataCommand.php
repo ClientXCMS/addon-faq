@@ -27,7 +27,7 @@ class CleanupOrphanedSectionMetadataCommand extends Command
         $validKeys = array_map(fn ($section) => 'display_' . $section, $registeredSections);
 
         $orphanedQuery = Metadata::query()
-            ->where('model_type', Faq::class)
+            ->where('model_type', (new Faq())->getMorphClass())
             ->where('key', 'like', 'display_%');
 
         if (!empty($validKeys)) {

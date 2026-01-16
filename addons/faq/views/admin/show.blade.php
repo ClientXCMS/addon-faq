@@ -94,7 +94,7 @@
                 name="display_sections[]"
                 value="{{ $sectionKey }}"
                 class="form-checkbox h-5 w-5 text-primary-600 rounded border-gray-300 dark:border-gray-600 focus:ring-primary-500"
-                {{ $faq->shouldDisplayOn($sectionKey) ? 'checked' : '' }}
+                {{ $faq->shouldDisplayOn($sectionKey) || in_array($sectionKey, old('display_sections', [])) ? 'checked' : '' }}
               >
               <span class="ml-3 text-sm text-gray-700 dark:text-gray-300">{{ $sectionLabel }}</span>
             </label>

@@ -19,6 +19,8 @@ class FaqUsefulness extends Model
     ];
 
     protected $casts = [
+        'faq_id' => 'integer',
+        'user_id' => 'integer',
         'is_useful' => 'boolean',
     ];
 

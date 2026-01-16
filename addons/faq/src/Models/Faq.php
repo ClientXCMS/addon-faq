@@ -94,6 +94,10 @@ class Faq extends Model
         return (int) round(($yes / $this->total_votes) * 100);
     }
 
+    /**
+     * @param string $section Section key to filter FAQs by
+     * @param int|null $limit Maximum number of FAQs to return
+     */
     public static function forSection(string $section, ?int $limit = null): Collection
     {
         $query = static::query()

@@ -16,14 +16,25 @@ class FaqServiceProvider extends BaseAddonServiceProvider
     protected string $name = 'faq';
     protected string $version = '1.0.0';
 
+    /**
+     * Register application services.
+     *
+     * Binds the FaqSectionRegistry as a singleton, allowing themes
+     * to register custom FAQ display sections via app('faq.sections').
+     */
     public function register(): void
     {
-        // Singleton allowing themes to register FAQ sections: app('faq.sections')->register(...)
         $this->app->singleton('faq.sections', function () {
             return new FaqSectionRegistry();
         });
     }
 
+    /**
+     * Bootstrap application services.
+     *
+     * Loads routes, translations, migrations, views, and registers
+     * the FAQ settings card in the admin panel.
+     */
     public function boot(): void
     {
         $this->loadRoutes();
@@ -44,6 +55,9 @@ class FaqServiceProvider extends BaseAddonServiceProvider
         );
     }
 
+    /**
+     * Register console commands for the FAQ addon.
+     */
     protected function registerCommands(): void
     {
         if ($this->app->runningInConsole()) {
@@ -52,6 +66,13 @@ class FaqServiceProvider extends BaseAddonServiceProvider
             ]);
         }
     }
+
+    /**
+     * Load web and admin routes for the FAQ addon.
+     *
+     * Web routes are loaded under the 'web' middleware.
+     * Admin routes are loaded under 'web', 'admin' middleware with admin prefix.
+     */
     public function loadRoutes(): void
     {
         try {
@@ -76,6 +97,9 @@ class FaqServiceProvider extends BaseAddonServiceProvider
         }
     }
 
+    /**
+     * Register admin settings routes for the FAQ addon configuration.
+     */
     protected function registerSettingsRoutes(): void
     {
         try {
