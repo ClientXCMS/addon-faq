@@ -8,7 +8,7 @@ use App\Extensions\BaseAddonServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Addons\Faq\Controllers\Admin\FaqController;
-use App\Addons\Faq\Database\Seeders\FaqSeeder;
+use Database\Seeders\FaqSeeder;
 
 class FaqServiceProvider extends BaseAddonServiceProvider
 {
