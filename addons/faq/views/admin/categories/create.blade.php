@@ -32,7 +32,7 @@
             @include('admin/shared/input', [
               'name'          => 'name',
               'label'         => __('faq::messages.categories.formulaire.name'),
-              'value'         => old('name', $category->name),
+              'value'         => old('name', $category->getTranslation('name')),
               'required'      => true,
             ])
           </div>

@@ -1,6 +1,6 @@
 @extends('admin/layouts/admin')
 
-@section('title', __('faq::messages.categories.show.title', ['name' => $category->name]))
+@section('title', __('faq::messages.categories.show.title', ['name' => $category->getTranslation('name')]))
 
 @section('content')
 <div class="container mx-auto">
@@ -14,7 +14,7 @@
       <div class="card-heading flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-            {{ __('faq::messages.categories.show.title', ['name' => $category->name]) }}
+            {{ __('faq::messages.categories.show.title', ['name' => $category->getTranslation('name')]) }}
           </h2>
           <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('faq::messages.categories.show.description') }}
@@ -34,7 +34,7 @@
             @include('admin/shared/input', [
               'name'          => 'name',
               'label'         => __('faq::messages.categories.formulaire.name'),
-              'value'         => old('name', $category->name),
+              'value'         => old('name', $category->getTranslation('name')),
               'required'      => true,
             ])
           </div>
