@@ -76,6 +76,7 @@ return [
         'expert_badge' => 'Expert Team',
     ],
     'categories' => [
+        'label' => 'Category',
         'index' => [
             'title' => 'FAQ Categories',
             'description' => 'Management of question and answer categories.',

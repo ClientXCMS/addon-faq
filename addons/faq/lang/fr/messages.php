@@ -73,6 +73,7 @@ return [
         'expert_badge' => 'Équipe experte',
     ],
     'categories' => [
+        'label' => 'Catégorie',
         'index' => [
             'title' => 'Catégories FAQ',
             'description' => 'Gestion des catégories de questions / réponses.',

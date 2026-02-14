@@ -49,7 +49,7 @@
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.title') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
-                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.categories.index.title') }}</span>
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.categories.label') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.group') }}</span>
