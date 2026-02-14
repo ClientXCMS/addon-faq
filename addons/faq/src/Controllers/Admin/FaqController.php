@@ -13,6 +13,7 @@ use App\Addons\Faq\Models\Faq;
 use App\Models\Store\Group;
 use App\Models\Store\Product;
 use App\Http\Controllers\Admin\AbstractCrudController;
+use App\Theme\ThemeManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -39,6 +40,8 @@ class FaqController extends AbstractCrudController
     public function destroy(Faq $faq): RedirectResponse
     {
         $faq->delete();
+        ThemeManager::clearCache();
+
         return $this->deleteRedirect($faq);
     }
 
@@ -64,6 +67,7 @@ class FaqController extends AbstractCrudController
 
         $faq = Faq::create($data);
         $faq->setDisplaySections($displaySections);
+        ThemeManager::clearCache();
 
         return $this->storeRedirect($faq);
     }
@@ -108,6 +112,7 @@ class FaqController extends AbstractCrudController
 
         $faq->update($data);
         $faq->setDisplaySections($displaySections);
+        ThemeManager::clearCache();
 
         return $this->updateRedirect($faq);
     }
