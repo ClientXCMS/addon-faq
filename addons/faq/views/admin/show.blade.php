@@ -145,7 +145,7 @@
               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ __('faq::messages.client.useful_yes') }}
               </p>
-              <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
+              <p class="text-3xl font-semibold text-gray-800 dark:text-white leading-none">
                 {{ $faq->useful_yes_count ?? 0 }}
               </p>
             </div>
@@ -158,7 +158,7 @@
               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ __('faq::messages.client.useful_no') }}
               </p>
-              <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
+              <p class="text-3xl font-semibold text-gray-800 dark:text-white leading-none">
                 {{ $faq->useful_no_count ?? 0 }}
               </p>
             </div>
@@ -171,7 +171,7 @@
               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ __('store.total') }}
               </p>
-              <p class="text-3xl font-semibold text-gray-900 dark:text-gray-50 leading-none">
+              <p class="text-3xl font-semibold text-gray-800 dark:text-white leading-none">
                 {{ ($faq->useful_yes_count ?? 0) + ($faq->useful_no_count ?? 0) }}
               </p>
             </div>
