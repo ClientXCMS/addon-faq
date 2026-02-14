@@ -23,7 +23,7 @@
 
         <div class="mt-3 sm:mt-0 flex gap-2">
           <button class="btn btn-primary">
-            {{ __('admin.update') }}
+            {{ __('global.update') }}
           </button>
         </div>
       </div>
