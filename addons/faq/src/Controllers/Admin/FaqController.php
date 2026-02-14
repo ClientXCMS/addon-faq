@@ -24,7 +24,7 @@ class FaqController extends AbstractCrudController
     protected string $model = Faq::class;
     protected string $viewPath = 'faq_admin::';
     protected string $routePath = 'admin.faq';
-    protected array $relations = ['group', 'product'];
+    protected array $relations = ['group', 'product', 'category'];
     protected ?string $managedPermission = 'admin.manage_faqs';
     protected string $searchField = 'title';
 

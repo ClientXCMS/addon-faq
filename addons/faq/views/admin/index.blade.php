@@ -49,6 +49,9 @@
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.title') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.categories.index.title') }}</span>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.group') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
@@ -72,7 +75,7 @@
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                     @if ($items->count() === 0)
                                         <tr class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
-                                            <td colspan="8" class="px-6 py-8 whitespace-nowrap text-center">
+                                            <td colspan="9" class="px-6 py-8 whitespace-nowrap text-center">
                                                 <div class="flex flex-col items-center">
                                                     <p class="text-sm text-gray-800 dark:text-gray-400">{{ __('global.no_results') }}</p>
                                                 </div>
@@ -91,6 +94,13 @@
                                                 <span class="block px-6 py-2">
                                                     <span class="text-sm text-gray-700 dark:text-gray-300 font-medium">
                                                         {{ $faq->title }}
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="h-px w-px whitespace-nowrap">
+                                                <span class="block px-6 py-2">
+                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                        {{ $faq->category?->getTranslation('name') ?? '-' }}
                                                     </span>
                                                 </span>
                                             </td>
