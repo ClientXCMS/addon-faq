@@ -38,35 +38,35 @@
                             </div>
                         </div>
 
-                        <div class="border rounded-lg overflow-x-auto dark:border-gray-700">
-                            <table class="w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
+                        <div class="border rounded-lg overflow-hidden dark:border-gray-700">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="w-[50px] px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">#</span>
                                         </th>
-                                        <th scope="col" class="w-[25%] px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.title') }}</span>
                                         </th>
-                                        <th scope="col" class="w-[12%] px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('faq::messages.categories.label') }}</span>
                                         </th>
-                                        <th scope="col" class="w-[15%] px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.group') }}</span>
                                         </th>
-                                        <th scope="col" class="w-[12%] px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.product') }}</span>
                                         </th>
-                                        <th scope="col" class="w-[40px] px-2 py-3 text-center">
+                                        <th scope="col" class="px-3 py-3 text-center">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"><i class="bi bi-hand-thumbs-up"></i></span>
                                         </th>
-                                        <th scope="col" class="w-[40px] px-2 py-3 text-center">
+                                        <th scope="col" class="px-3 py-3 text-center">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"><i class="bi bi-hand-thumbs-down"></i></span>
                                         </th>
-                                        <th scope="col" class="w-[100px] px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.created') }}</span>
                                         </th>
-                                        <th scope="col" class="px-4 py-3 text-start">
+                                        <th scope="col" class="px-3 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.actions') }}</span>
                                         </th>
                                     </tr>
@@ -85,28 +85,28 @@
 
                                     @foreach($items as $faq)
                                         <tr class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
-                                            <td class="px-4 py-2 whitespace-nowrap">
+                                            <td class="px-3 py-2 whitespace-nowrap">
                                                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ $faq->id }}</span>
                                             </td>
-                                            <td class="px-4 py-2">
-                                                <span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" title="{{ $faq->title }}">{{ $faq->title }}</span>
+                                            <td class="px-3 py-2">
+                                                <div class="max-w-[220px]"><span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" title="{{ $faq->title }}">{{ $faq->title }}</span></div>
                                             </td>
-                                            <td class="px-4 py-2">
-                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->category?->getTranslation('name') ?? '-' }}">{{ $faq->category?->getTranslation('name') ?? '-' }}</span>
+                                            <td class="px-3 py-2">
+                                                <div class="max-w-[120px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->category?->getTranslation('name') ?? '-' }}">{{ $faq->category?->getTranslation('name') ?? '-' }}</span></div>
                                             </td>
-                                            <td class="px-4 py-2">
-                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->group->name ?? '-' }}">{{ $faq->group->name ?? '-' }}</span>
+                                            <td class="px-3 py-2">
+                                                <div class="max-w-[180px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->group->name ?? '-' }}">{{ $faq->group->name ?? '-' }}</span></div>
                                             </td>
-                                            <td class="px-4 py-2">
-                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->product->name ?? '-' }}">{{ $faq->product->name ?? '-' }}</span>
+                                            <td class="px-3 py-2">
+                                                <div class="max-w-[120px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->product->name ?? '-' }}">{{ $faq->product->name ?? '-' }}</span></div>
                                             </td>
-                                            <td class="px-2 py-2 text-center whitespace-nowrap">
+                                            <td class="px-3 py-2 text-center whitespace-nowrap">
                                                 <span class="text-sm text-emerald-500 font-medium">{{ $faq->useful_yes_count ?? 0 }}</span>
                                             </td>
-                                            <td class="px-2 py-2 text-center whitespace-nowrap">
+                                            <td class="px-3 py-2 text-center whitespace-nowrap">
                                                 <span class="text-sm text-red-500 font-medium">{{ $faq->useful_no_count ?? 0 }}</span>
                                             </td>
-                                            <td class="px-4 py-2 whitespace-nowrap">
+                                            <td class="px-3 py-2 whitespace-nowrap">
                                                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ $faq->created_at ? $faq->created_at->format('d/m/Y') : '-' }}</span>
                                             </td>
 
