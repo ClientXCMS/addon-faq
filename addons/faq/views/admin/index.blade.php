@@ -55,6 +55,12 @@
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.product') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"><i class="bi bi-hand-thumbs-up"></i></span>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-start">
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200"><i class="bi bi-hand-thumbs-down"></i></span>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-start">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">{{ __('global.created') }}</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start">
@@ -66,7 +72,7 @@
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                     @if ($items->count() === 0)
                                         <tr class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
-                                            <td colspan="6" class="px-6 py-8 whitespace-nowrap text-center">
+                                            <td colspan="8" class="px-6 py-8 whitespace-nowrap text-center">
                                                 <div class="flex flex-col items-center">
                                                     <p class="text-sm text-gray-800 dark:text-gray-400">{{ __('global.no_results') }}</p>
                                                 </div>
@@ -100,6 +106,16 @@
                                                     <span class="text-sm text-gray-600 dark:text-gray-400">
                                                         {{ $faq->product->name ?? '-' }}
                                                     </span>
+                                                </span>
+                                            </td>
+                                            <td class="h-px w-px whitespace-nowrap">
+                                                <span class="block px-6 py-2">
+                                                    <span class="text-sm text-emerald-500 font-medium">{{ $faq->useful_yes_count ?? 0 }}</span>
+                                                </span>
+                                            </td>
+                                            <td class="h-px w-px whitespace-nowrap">
+                                                <span class="block px-6 py-2">
+                                                    <span class="text-sm text-red-500 font-medium">{{ $faq->useful_no_count ?? 0 }}</span>
                                                 </span>
                                             </td>
                                             <td class="h-px w-px whitespace-nowrap">
