@@ -7,13 +7,9 @@ Route::get('/', [FaqController::class, 'index'])->name('index');
 
 Route::get('/create', [FaqController::class, 'create'])->name('create');
 Route::post('/store', [FaqController::class, 'store'])->name('store');
-Route::get('/{faq}', [FaqController::class, 'show'])->name('show');
-Route::put('/{faq}', [FaqController::class, 'update'])->name('update');
 Route::post('/faq/{faq}/translations', [FaqController::class, 'translations'])->name('translations');
 
-Route::delete('/{faq}', [FaqController::class, 'destroy'])->name('destroy');
-
-// Category routes
+// Category routes — must be before /{faq} to avoid wildcard capture
 Route::prefix('categories')->name('categories.')->group(function () {
     Route::get('/', [FaqCategoryController::class, 'index'])->name('index');
     Route::get('/create', [FaqCategoryController::class, 'create'])->name('create');
@@ -22,3 +18,7 @@ Route::prefix('categories')->name('categories.')->group(function () {
     Route::put('/{category}', [FaqCategoryController::class, 'update'])->name('update');
     Route::delete('/{category}', [FaqCategoryController::class, 'destroy'])->name('destroy');
 });
+
+Route::get('/{faq}', [FaqController::class, 'show'])->name('show');
+Route::put('/{faq}', [FaqController::class, 'update'])->name('update');
+Route::delete('/{faq}', [FaqController::class, 'destroy'])->name('destroy');
