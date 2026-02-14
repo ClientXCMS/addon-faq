@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="border rounded-lg overflow-hidden dark:border-gray-700">
+                        <div class="border rounded-lg overflow-x-auto dark:border-gray-700">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead>
                                     <tr>
@@ -90,32 +90,24 @@
                                                     <span class="text-sm text-gray-600 dark:text-gray-400">{{ $faq->id }}</span>
                                                 </span>
                                             </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <span class="block px-6 py-2">
-                                                    <span class="text-sm text-gray-700 dark:text-gray-300 font-medium">
-                                                        {{ $faq->title }}
-                                                    </span>
+                                            <td class="px-6 py-2 max-w-[200px]">
+                                                <span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" title="{{ $faq->title }}">
+                                                    {{ $faq->title }}
                                                 </span>
                                             </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <span class="block px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                        {{ $faq->category?->getTranslation('name') ?? '-' }}
-                                                    </span>
+                                            <td class="px-6 py-2 max-w-[150px]">
+                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->category?->getTranslation('name') ?? '-' }}">
+                                                    {{ $faq->category?->getTranslation('name') ?? '-' }}
                                                 </span>
                                             </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <span class="block px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                        {{ $faq->group->name ?? '-' }}
-                                                    </span>
+                                            <td class="px-6 py-2 max-w-[150px]">
+                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->group->name ?? '-' }}">
+                                                    {{ $faq->group->name ?? '-' }}
                                                 </span>
                                             </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <span class="block px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                        {{ $faq->product->name ?? '-' }}
-                                                    </span>
+                                            <td class="px-6 py-2 max-w-[150px]">
+                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->product->name ?? '-' }}">
+                                                    {{ $faq->product->name ?? '-' }}
                                                 </span>
                                             </td>
                                             <td class="h-px w-px whitespace-nowrap">
