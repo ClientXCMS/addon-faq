@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container mx-auto">
+  @include('admin/shared/alerts')
   <form method="POST" action="{{ route($routePath.'.store') }}">
     @csrf
 
