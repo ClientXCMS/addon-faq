@@ -46,10 +46,12 @@
     $headingDescription = $description ?? __('faq::messages.client.description');
     $isGroupContext = false;
     $usefulnessEnabled = setting('faq_usefulness_enabled', true);
+    $hideHeader = $hideHeader ?? false;
 @endphp
 
 @if($faqs->isNotEmpty())
 <div class="max-w-[85rem] {{ $isGroupContext ? 'px-4 py-10 sm:px-6 lg:px-8 lg:py-14' : 'px-2 py-5 sm:px-3 lg:px-4 lg-py-7' }} mx-auto">
+  @unless($hideHeader)
   <div class="max-w-2xl mx-auto text-center mb-12 lg:mb-16">
     <h2 class="text-2xl font-bold md:text-3xl md:leading-tight text-gray-800 dark:text-neutral-200">
       {{ $headingTitle }}
@@ -58,6 +60,7 @@
       {{ $headingDescription }}
     </p>
   </div>
+  @endunless
 
   <div class="max-w-5xl mx-auto">
     @if($isGroupContext)
