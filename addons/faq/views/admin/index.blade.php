@@ -89,13 +89,13 @@
                                                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ $faq->id }}</span>
                                             </td>
                                             <td class="px-3 py-2">
-                                                <span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" style="max-width:180px" title="{{ $faq->title }}">{{ $faq->title }}</span>
+                                                <span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" style="max-width:280px" title="{{ $faq->title }}">{{ $faq->title }}</span>
                                             </td>
                                             <td class="px-3 py-2">
                                                 <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" style="max-width:120px" title="{{ $faq->category?->getTranslation('name') ?? '-' }}">{{ $faq->category?->getTranslation('name') ?? '-' }}</span>
                                             </td>
                                             <td class="px-3 py-2">
-                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" style="max-width:130px" title="{{ $faq->group->name ?? '-' }}">{{ $faq->group->name ?? '-' }}</span>
+                                                <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" style="max-width:180px" title="{{ $faq->group->name ?? '-' }}">{{ $faq->group->name ?? '-' }}</span>
                                             </td>
                                             <td class="px-3 py-2">
                                                 <span class="text-sm text-gray-600 dark:text-gray-400 truncate block" style="max-width:120px" title="{{ $faq->product->name ?? '-' }}">{{ $faq->product->name ?? '-' }}</span>
