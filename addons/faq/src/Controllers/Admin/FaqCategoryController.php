@@ -57,7 +57,8 @@ class FaqCategoryController extends AbstractCrudController
         $category = FaqCategory::create($data);
         ThemeManager::clearCache();
 
-        return $this->storeRedirect($category);
+        return redirect()->route('admin.faq.categories.index')
+            ->with('success', __('admin.create'));
     }
 
     public function update(Request $request, FaqCategory $category)
@@ -78,7 +79,8 @@ class FaqCategoryController extends AbstractCrudController
         $category->update($data);
         ThemeManager::clearCache();
 
-        return $this->updateRedirect($category);
+        return redirect()->route('admin.faq.categories.index')
+            ->with('success', __('global.update'));
     }
 
     public function show(FaqCategory $category)
