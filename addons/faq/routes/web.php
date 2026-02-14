@@ -2,6 +2,8 @@
 
 use App\Addons\Faq\Controllers\Client\FaqController;
 
+Route::redirect('faqs', 'faq', 301);
+
 Route::prefix('faq')->name('client.faq.')->group(function () {
     Route::get('/', [FaqController::class, 'index'])->name('index');
     Route::get('/group/{group:slug}', [FaqController::class, 'group'])->name('group');
