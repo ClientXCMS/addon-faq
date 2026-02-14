@@ -89,13 +89,13 @@
                                                 <span class="text-sm text-gray-600 dark:text-gray-400">{{ $faq->id }}</span>
                                             </td>
                                             <td class="px-3 py-2">
-                                                <div class="max-w-[220px]"><span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" title="{{ $faq->title }}">{{ $faq->title }}</span></div>
+                                                <div class="max-w-[180px]"><span class="text-sm text-gray-700 dark:text-gray-300 font-medium truncate block" title="{{ $faq->title }}">{{ $faq->title }}</span></div>
                                             </td>
                                             <td class="px-3 py-2">
                                                 <div class="max-w-[120px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->category?->getTranslation('name') ?? '-' }}">{{ $faq->category?->getTranslation('name') ?? '-' }}</span></div>
                                             </td>
                                             <td class="px-3 py-2">
-                                                <div class="max-w-[180px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->group->name ?? '-' }}">{{ $faq->group->name ?? '-' }}</span></div>
+                                                <div class="max-w-[130px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->group->name ?? '-' }}">{{ $faq->group->name ?? '-' }}</span></div>
                                             </td>
                                             <td class="px-3 py-2">
                                                 <div class="max-w-[120px]"><span class="text-sm text-gray-600 dark:text-gray-400 truncate block" title="{{ $faq->product->name ?? '-' }}">{{ $faq->product->name ?? '-' }}</span></div>
