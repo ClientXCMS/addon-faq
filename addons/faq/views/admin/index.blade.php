@@ -27,7 +27,11 @@
                                     {{ __('faq::messages.index.description') }}
                                 </p>
                             </div>
-                            <div class="mt-2 sm:mt-0">
+                            <div class="mt-2 sm:mt-0 flex gap-2">
+                                <a class="btn btn-secondary text-sm w-full sm:w-auto" href="{{ route('admin.faq.categories.index') }}">
+                                    <i class="bi bi-folder me-1"></i>
+                                    {{ __('faq::messages.categories.title') }}
+                                </a>
                                 <a class="btn btn-primary text-sm w-full sm:w-auto" href="{{ route($routePath.'.create') }}">
                                     {{ __('admin.create') }}
                                 </a>

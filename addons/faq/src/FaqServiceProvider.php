@@ -4,6 +4,7 @@ namespace App\Addons\Faq;
 
 use App\Addons\Faq\Console\Commands\CleanupOrphanedSectionMetadataCommand;
 use App\Addons\Faq\Services\FaqSectionRegistry;
+use App\Core\Menu\AdminMenuItem;
 use App\Extensions\BaseAddonServiceProvider;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,14 @@ class FaqServiceProvider extends BaseAddonServiceProvider
         $this->registerSettingsRoutes();
         $this->registerCommands();
         $this->app['extension']->addSeeder(FaqSeeder::class);
+        $this->app['extension']->addAdminMenuItem(new AdminMenuItem(
+            'faq',
+            'admin.faq.index',
+            'bi bi-question-circle',
+            'faq::messages.settings.title',
+            50,
+            'admin.settings.manage'
+        ));
         $this->app['settings']->addCardItem(
             'personalization',
             'faq',
