@@ -10,6 +10,7 @@
 namespace App\Addons\Faq\Controllers\Client;
 
 use App\Addons\Faq\Models\Faq;
+use App\Addons\Faq\Models\FaqCategory;
 use App\Http\Controllers\Controller;
 use App\Models\Store\Group;
 use App\Models\Store\Product;
@@ -26,10 +27,16 @@ class FaqController extends Controller
 
     public function index(): View
     {
-        $faqs = Faq::forContext();
+        $categories = FaqCategory::ordered()
+            ->with(['faqs' => function ($query) {
+                $query->where(function ($q) {
+                    $q->whereNull('group_id')->whereNull('product_id');
+                })->withUsefulnessCounts()->orderBy('order')->orderBy('id');
+            }])
+            ->get();
 
         return view('faq::index', [
-            'faqs'          => $faqs,
+            'categories'    => $categories,
             'pageTitle'     => __('faq::messages.client.general_title'),
             'pageDescription' => __('faq::messages.client.general_description'),
             'ctaUrl'        => route('front.support.index'),

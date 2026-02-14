@@ -10,6 +10,7 @@
 namespace App\Addons\Faq\Controllers\Admin;
 
 use App\Addons\Faq\Models\Faq;
+use App\Addons\Faq\Models\FaqCategory;
 use App\Models\Store\Group;
 use App\Models\Store\Product;
 use App\Http\Controllers\Admin\AbstractCrudController;
@@ -33,6 +34,7 @@ class FaqController extends AbstractCrudController
         $data['faq'] = new Faq();
         $data['groups'] = Group::orderBy('name')->pluck('name', 'id')->toArray();
         $data['products'] = Product::orderBy('name')->pluck('name', 'id')->toArray();
+        $data['categories'] = FaqCategory::ordered()->pluck('name', 'id')->toArray();
         $data['availableSections'] = Faq::getAvailableSections();
         return $data;
     }
@@ -54,6 +56,7 @@ class FaqController extends AbstractCrudController
             'answer'  => ['required','string'],
             'group_id' => ['nullable','integer','exists:groups,id'],
             'product_id' => ['nullable','integer','exists:products,id'],
+            'category_id' => ['nullable','integer','exists:faq_categories,id'],
             'sort_order' => ['nullable','integer','min:0'],
             'display_sections' => ['nullable','array'],
             'display_sections.*' => ['string', Rule::in($validSectionKeys)],
@@ -76,6 +79,7 @@ class FaqController extends AbstractCrudController
     {
         $groups = Group::orderBy('name')->pluck('name', 'id')->toArray();
         $products = Product::orderBy('name')->pluck('name', 'id')->toArray();
+        $categories = FaqCategory::ordered()->pluck('name', 'id')->toArray();
 
         $faq->loadCount([
             'usefulnessVotes as useful_yes_count' => fn ($query) => $query->where('is_useful', true),
@@ -86,6 +90,7 @@ class FaqController extends AbstractCrudController
             'faq'       => $faq,
             'groups'    => $groups,
             'products'  => $products,
+            'categories' => $categories,
             'routePath' => $this->routePath,
             'availableSections' => Faq::getAvailableSections(),
         ]);
@@ -99,6 +104,7 @@ class FaqController extends AbstractCrudController
             'answer'  => ['required','string'],
             'group_id' => ['nullable','integer','exists:groups,id'],
             'product_id' => ['nullable','integer','exists:products,id'],
+            'category_id' => ['nullable','integer','exists:faq_categories,id'],
             'sort_order' => ['nullable','integer','min:0'],
             'display_sections' => ['nullable','array'],
             'display_sections.*' => ['string', Rule::in($validSectionKeys)],

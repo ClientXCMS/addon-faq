@@ -27,12 +27,23 @@
       </div>
 
       <div class="card-body space-y-5">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
         @include('admin/shared/input', [
           'name'          => 'title',
           'label'         => __('faq::messages.formulaire.title'),
           'value'         => old('title', $faq->title),
+        ])
+        </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+        @include('admin/shared/select', [
+          'name'          => 'category_id',
+          'label'         => __('faq::messages.formulaire.category'),
+          'options'       => ['' => __('global.none')] + $categories,
+          'value'         => old('category_id', $faq->category_id ?? ''),
+          'help'          => __('faq::messages.formulaire.category_help'),
         ])
         </div>
         <div>

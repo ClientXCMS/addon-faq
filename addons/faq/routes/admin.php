@@ -1,6 +1,7 @@
 <?php
 
 use App\Addons\Faq\Controllers\Admin\FaqController;
+use App\Addons\Faq\Controllers\Admin\FaqCategoryController;
 
 Route::get('/', [FaqController::class, 'index'])->name('index');
 
@@ -11,3 +12,13 @@ Route::put('/{faq}', [FaqController::class, 'update'])->name('update');
 Route::post('/faq/{faq}/translations', [FaqController::class, 'translations'])->name('translations');
 
 Route::delete('/{faq}', [FaqController::class, 'destroy'])->name('destroy');
+
+// Category routes
+Route::prefix('categories')->name('categories.')->group(function () {
+    Route::get('/', [FaqCategoryController::class, 'index'])->name('index');
+    Route::get('/create', [FaqCategoryController::class, 'create'])->name('create');
+    Route::post('/store', [FaqCategoryController::class, 'store'])->name('store');
+    Route::get('/{category}', [FaqCategoryController::class, 'show'])->name('show');
+    Route::put('/{category}', [FaqCategoryController::class, 'update'])->name('update');
+    Route::delete('/{category}', [FaqCategoryController::class, 'destroy'])->name('destroy');
+});
