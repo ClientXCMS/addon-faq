@@ -172,10 +172,6 @@
     @endif
   </div>
 </div>
-@else
-<div class="max-w-3xl mx-auto px-4 py-8 text-center text-gray-500 dark:text-neutral-400">
-  {{ __('faq::messages.client.empty') }}
-</div>
 @endif
 
 @once

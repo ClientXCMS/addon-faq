@@ -6,7 +6,7 @@
   @include('faq::widget', [
     'group' => $group ?? null,
     'product' => $product ?? null,
-    'faqs' => $faqs ?? collect(),
+    'faqs' => $faqs ?? null,
     'title' => $pageTitle ?? __('faq::messages.client.title'),
     'description' => $pageDescription ?? __('faq::messages.client.description'),
   ])
